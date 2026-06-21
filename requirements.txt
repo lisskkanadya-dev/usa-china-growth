@@ -1,0 +1,6 @@
+pandas
+requests
+plotly
+jinja2
+pytest
+pytest-mock

@@ -55,7 +55,8 @@ WORLD_BANK_API_BASE = "https://api.worldbank.org/v2"
 
 # Data caching
 CACHE_DIR = "data"
-OUTPUT_DIR = "output"
+# Output directory for generated report and assets (GitHub Pages uses /docs)
+OUTPUT_DIR = "docs"
 
 # Report settings
-REPORT_OUTPUT_PATH = "output/index.html"
+REPORT_OUTPUT_PATH = "docs/index.html"

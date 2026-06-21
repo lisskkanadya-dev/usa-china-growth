@@ -119,22 +119,20 @@ def build_theory_interpretation(summary: dict) -> dict:
         chn_growth = summary.get("gdp_growth", {}).get("CHN", 0)
         
         capital_text = (
-            "Capital accumulation (Solow model perspective): "
+            "Akumulacja kapitału (perspektywa modelu Solowa): "
         )
         
         if chn_inv > usa_inv:
             capital_text += (
-                f"China's investment intensity ({chn_inv:.1f}% of GDP) exceeds that of the USA ({usa_inv:.1f}% of GDP). "
-                f"According to the Solow model, higher investment rates facilitate capital deepening and can sustain "
-                f"relatively faster short- to medium-term growth. This is consistent with China's observed higher growth rate ({chn_growth:.1%}) "
-                f"compared to the USA ({usa_growth:.1%}). However, the data suggest that investment alone does not fully explain "
-                f"all growth differences, warranting examination of other mechanisms."
+                f"Wskaźnik inwestycji w Chinach ({chn_inv:.1f}% PKB) przewyższa wskaźnik USA ({usa_inv:.1f}% PKB). "
+                f"Zgodnie z modelem Solowa wyższe stopy inwestycji sprzyjają pogłębianiu kapitału i mogą utrzymywać "
+                f"stosunkowo szybszy wzrost w perspektywie krótkiej i średniej. Jest to zgodne z obserwowanym wyższym tempem wzrostu Chin ({chn_growth:.1%}) "
+                f"w porównaniu z USA ({usa_growth:.1%}). Jednak same inwestycje nie wyjaśniają wszystkich różnic we wzroście, co wymaga analizy innych mechanizmów."
             )
         else:
             capital_text += (
-                f"Despite similar investment levels (USA: {usa_inv:.1f}%, China: {chn_inv:.1f}% of GDP), "
-                f"growth rates differ significantly. This suggests that capital accumulation, while important, may not be the sole driver "
-                f"of growth differences in this period."
+                f"Mimo podobnego poziomu inwestycji (USA: {usa_inv:.1f}%, Chiny: {chn_inv:.1f}% PKB), tempo wzrostu różni się znacząco. "
+                f"Sugeruje to, że akumulacja kapitału, choć ważna, nie jest jedynym czynnikiem wyjaśniającym różnice we wzroście w tym okresie."
             )
         
         interpretation["capital_accumulation"] = capital_text
@@ -145,26 +143,25 @@ def build_theory_interpretation(summary: dict) -> dict:
         chn_rd = summary.get("rd_intensity", {}).get("CHN", 0)
         
         rd_text = (
-            "Technology and endogenous growth (endogenous growth theory perspective): "
+            "Technologia i wzrost endogeniczny (perspektywa teorii wzrostu endogenicznego): "
         )
         
         if usa_rd > chn_rd:
             rd_text += (
-                f"The USA exhibits higher R&D intensity ({usa_rd:.2f}% of GDP) relative to China ({chn_rd:.2f}% of GDP). "
-                f"This pattern is consistent with endogenous growth theory, which emphasizes that R&D, innovation, and knowledge creation "
-                f"drive long-term growth. The USA's research-intensive economy suggests a focus on technological progress and human capital. "
-                f"China's lower R&D share may reflect a catch-up phase emphasizing capital and technology adoption over original innovation, "
-                f"though this is changing rapidly in recent years."
+                f"USA odnotowuje wyższą intensywność B+R ({usa_rd:.2f}% PKB) w porównaniu do Chin ({chn_rd:.2f}% PKB). "
+                f"Taki wzorzec jest zgodny z teorią wzrostu endogenicznego, która podkreśla rolę B+R, innowacji i tworzenia wiedzy w długoterminowym wzroście. "
+                f"Gospodarka USA koncentruje się na postępie technologicznym i kapitale ludzkim. Niższy udział B+R w Chinach może odzwierciedlać etap nadrabiania zaległości, "
+                f"choć obserwuje się szybki wzrost wydatków na B+R w ostatnich latach."
             )
         elif chn_rd > usa_rd:
             rd_text += (
-                f"China's R&D intensity ({chn_rd:.2f}% of GDP) has increased and now exceeds or closely matches the USA ({usa_rd:.2f}% of GDP). "
-                f"This trend suggests a transition from capital-driven to knowledge-driven growth, consistent with endogenous growth theory. "
-                f"Rising R&D investment indicates an emerging focus on technological innovation and endogenous knowledge creation."
+                f"Intensywność B+R w Chinach ({chn_rd:.2f}% PKB) wzrosła i obecnie dorównuje lub przewyższa USA ({usa_rd:.2f}% PKB). "
+                f"Trend ten sugeruje przejście od wzrostu napędzanego kapitałem do wzrostu opartego na wiedzy, zgodnie z teorią endogeniczną. "
+                f"Rosnące inwestycje w B+R wskazują na rosnące znaczenie innowacji i tworzenia wiedzy."
             )
         else:
             rd_text += (
-                f"Both economies maintain comparable R&D intensities at {usa_rd:.2f}% of GDP, suggesting convergence in innovation strategies."
+                f"Obie gospodarki utrzymują podobną intensywność B+R na poziomie {usa_rd:.2f}% PKB, co może sugerować konwergencję strategii innowacyjnych."
             )
         
         interpretation["technology_and_innovation"] = rd_text
@@ -175,33 +172,30 @@ def build_theory_interpretation(summary: dict) -> dict:
         chn_pop = summary.get("population_growth", {}).get("CHN", 0)
         
         demo_text = (
-            "Demographic factors (Solow model perspective): "
+            "Czynniki demograficzne (perspektywa modelu Solowa): "
         )
         
         if chn_pop > usa_pop:
             demo_text += (
-                f"China's population growth rate ({chn_pop:.2%}) exceeds that of the USA ({usa_pop:.2%}). "
-                f"In the Solow model framework, higher population growth can dilute capital per worker, potentially slowing growth per capita "
-                f"(ceteris paribus). However, a larger working-age population can also expand markets and human capital availability. "
-                f"The observed GDP per capita growth in China suggests that capital accumulation and productivity gains have outpaced "
-                f"demographic dilution effects."
+                f"Wzrost liczby ludności w Chinach ({chn_pop:.2%}) przewyższa tempo w USA ({usa_pop:.2%}). "
+                f"W ramach modelu Solowa wyższe tempo demograficzne może rozcieńczać kapitał na pracownika, co potencjalnie spowalnia wzrost PKB per capita (przy innych czynnikach niezmiennych). "
+                f"Jednocześnie większa populacja w wieku produkcyjnym może powiększać rynek i zasoby ludzkie. Obserwowany wzrost PKB per capita w Chinach sugeruje, że akumulacja kapitału i wzrost produktywności przewyższyły efekt rozcieńczenia demograficznego."
             )
         else:
             demo_text += (
-                f"The USA has maintained relatively stable population growth ({usa_pop:.2%}), similar to or exceeding China's rate ({chn_pop:.2%}). "
-                f"This demographic context provides relative stability for capital accumulation."
+                f"USA utrzymują stosunkowo stabilne tempo wzrostu ludności ({usa_pop:.2%}), porównywalne lub wyższe od Chin ({chn_pop:.2%}). "
+                f"Taka sytuacja demograficzna sprzyja stabilności w akumulacji kapitału."
             )
         
         interpretation["demographics"] = demo_text
     
     # Summary Theory Mapping
     interpretation["theory_summary"] = (
-        "Theoretical synthesis: The Solow model emphasizes capital accumulation and factor inputs as drivers of growth. "
-        "The data suggest that capital intensity plays a significant role, particularly in China's rapid development phase. "
-        "However, endogenous growth theory highlights the importance of R&D, human capital, and knowledge. "
-        "Both theories contribute insights: the Solow framework explains medium-term convergence dynamics and capital's role, "
-        "while endogenous growth theory illuminates technology's role and long-term growth sustainability. "
-        "Full causal inference would require econometric modeling beyond this descriptive analysis."
+        "Synteza teoretyczna: Model Solowa podkreśla rolę akumulacji kapitału i zasobów czynników produkcji jako motorów wzrostu. "
+        "Dane wskazują, że intensywność kapitałowa odgrywa istotną rolę, szczególnie w szybkiej fazie rozwoju Chin. "
+        "Jednocześnie teoria wzrostu endogenicznego uwypukla znaczenie B+R, kapitału ludzkiego i wiedzy. "
+        "Obie perspektywy dostarczają wartościowych wniosków: model Solowa tłumaczy dynamikę konwergencji i znaczenie kapitału w perspektywie krótkiej/średniej, "
+        "a teoria endogeniczna wyjaśnia rolę technologii i trwałość wzrostu w długim okresie. Pełna inferencja przyczynowa wymagałaby jednak modelowania ekonometrycznego wykraczającego poza zakres tej analizy."
     )
     
     return interpretation

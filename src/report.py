@@ -10,12 +10,11 @@ from jinja2 import Template
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -132,17 +131,17 @@ HTML_TEMPLATE = """
         </header>
 
         <section>
-            <h2>Methodology & Data Source</h2>
+            <h2>Metodologia i źródło danych</h2>
             <p>{{ methodology }}</p>
             <div class="note">
-                <strong>Data Source:</strong> World Bank Open Data API
-                <br><strong>Countries:</strong> United States (USA) and China (CHN)
-                <br><strong>Analysis Approach:</strong> Comparative analysis using economic growth models
+                <strong>Źródło danych:</strong> Otwarte dane Banku Światowego API
+                <br><strong>Kraje:</strong> Stany Zjednoczone (USA) i Chiny (CHN)
+                <br><strong>Podejście analityczne:</strong> Analiza porównawcza przy użyciu modeli wzrostu gospodarczego
             </div>
         </section>
 
         <section>
-            <h2>Data Availability</h2>
+            <h2>Dostępność danych</h2>
             <div class="data-table">
                 {{ data_availability_table | safe }}
             </div>
@@ -158,46 +157,46 @@ HTML_TEMPLATE = """
         {% endfor %}
 
         <section>
-            <h2>Results & Analysis</h2>
+            <h2>Wyniki i analiza</h2>
             
-            <h3>GDP Growth Comparison</h3>
+            <h3>Porównanie wzrostu PKB</h3>
             {{ gdp_growth_summary | safe }}
             
-            <h3>Capital Accumulation Analysis</h3>
+            <h3>Analiza akumulacji kapitału</h3>
             {{ capital_interpretation | safe }}
             
-            <h3>Demographic Factors</h3>
+            <h3>Czynniki demograficzne</h3>
             {{ demographic_interpretation | safe }}
             
-            <h3>Technology & R&D</h3>
+            <h3>Technologia i B+R</h3>
             {{ technology_interpretation | safe }}
         </section>
 
         <section>
-            <h2>Theoretical Framework</h2>
+            <h2>Ramy teoretyczne</h2>
             
-            <h3>Solow Model vs. Endogenous Growth Theory</h3>
+            <h3>Model Solowa vs. Teoria wzrostu endogenicznego</h3>
             {{ theory_mapping | safe }}
             
-            <h3>Key Insights</h3>
+            <h3>Kluczowe wnioski</h3>
             {{ theory_summary | safe }}
         </section>
 
         <section>
-            <h2>Limitations</h2>
+            <h2>Ograniczenia</h2>
             <div class="note">
                 {{ limitations | safe }}
             </div>
         </section>
 
         <section>
-            <h2>Conclusion</h2>
+            <h2>Wnioski</h2>
             {{ conclusion | safe }}
         </section>
 
         <footer>
-            <p>USA vs China Growth Analysis | Generated Report</p>
-            <p><small>This analysis uses descriptive statistics and economic theory. Causal inferences require additional econometric modeling.</small></p>
+            <p>Analiza wzrostu gospodarczego USA i Chin | Raport wygenerowany</p>
+            <p><small>Ta analiza wykorzystuje statystykę opisową i teorię ekonomii. Wnioski przyczynowe wymagają dodatkowego modelowania ekonometrycznego.</small></p>
         </footer>
     </div>
 </body>

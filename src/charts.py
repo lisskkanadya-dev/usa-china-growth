@@ -29,7 +29,7 @@ def create_line_chart(df, x_col: str, y_col: str, color_col: str, title: str, y_
         y=y_col,
         color=color_col,
         title=title,
-        labels={x_col: "Year", y_col: y_label},
+        labels={x_col: "Rok", y_col: y_label},
         markers=True,
     )
     
@@ -39,7 +39,10 @@ def create_line_chart(df, x_col: str, y_col: str, color_col: str, title: str, y_
         template="plotly_white",
     )
     
-    return fig.to_html(include_plotlyjs=False, div_id=title.replace(" ", "_").lower())
+    div_id = "chart_" + ''.join(
+        ch if ch.isalnum() or ch == '_' else '_' for ch in title.replace(" ", "_").lower()
+    )
+    return fig.to_html(include_plotlyjs='cdn', full_html=False, div_id=div_id)
 
 
 def create_gdp_chart(df) -> str:
@@ -54,15 +57,15 @@ def create_gdp_chart(df) -> str:
     gdp_data = df[df["indicator"] == "gdp_per_capita"].copy()
     
     if gdp_data.empty:
-        return "<p>No GDP per capita data available</p>"
+        return "<p>Brak dostępnych danych PKB per capita</p>"
     
     return create_line_chart(
         gdp_data,
         x_col="year",
         y_col="value",
         color_col="country_name",
-        title="GDP per Capita (Constant 2015 USD)",
-        y_label="GDP per Capita (USD)"
+        title="PKB per capita (USD stały 2015)",
+        y_label="PKB per capita (USD)"
     )
 
 
@@ -76,7 +79,7 @@ def create_growth_chart(df) -> str:
         HTML string of Plotly chart
     """
     if df.empty:
-        return "<p>No growth rate data available</p>"
+        return "<p>Brak dostępnych danych tempa wzrostu</p>"
     
     # Calculate annual growth from GDP data
     gdp_data = df[df["indicator"] == "gdp_per_capita"].copy()
@@ -87,15 +90,15 @@ def create_growth_chart(df) -> str:
     growth_data["annual_growth_pct"] = growth_data["annual_growth"] * 100
     
     if growth_data.empty:
-        return "<p>No growth rate data available</p>"
+        return "<p>Brak dostępnych danych tempa wzrostu</p>"
     
     return create_line_chart(
         growth_data,
         x_col="year",
         y_col="annual_growth_pct",
         color_col="country_name",
-        title="Annual GDP per Capita Growth Rate (%)",
-        y_label="Annual Growth (%)"
+        title="Roczne tempo wzrostu PKB per capita (%)",
+        y_label="Wzrost roczny (%)"
     )
 
 
@@ -111,7 +114,7 @@ def create_ratio_chart(df) -> str:
     gdp_data = df[df["indicator"] == "gdp_per_capita"].copy()
     
     if gdp_data.empty:
-        return "<p>No GDP data available for ratio calculation</p>"
+        return "<p>Brak dostępnych danych PKB dla obliczenia stosunku</p>"
     
     # Pivot to get USA and China values by year
     pivoted = gdp_data.pivot_table(
@@ -122,7 +125,7 @@ def create_ratio_chart(df) -> str:
     )
     
     if "USA" not in pivoted.columns or "CHN" not in pivoted.columns:
-        return "<p>USA or China data missing for ratio calculation</p>"
+        return "<p>Brak danych USA lub Chin dla obliczenia stosunku</p>"
     
     pivoted["ratio"] = pivoted["CHN"] / pivoted["USA"]
     ratio_data = pivoted[["ratio"]].reset_index()
@@ -133,20 +136,20 @@ def create_ratio_chart(df) -> str:
         x=ratio_data["year"],
         y=ratio_data["China_to_USA_Ratio"],
         mode="lines+markers",
-        name="China-to-USA Ratio",
+        name="Stosunek Chiny/USA",
         line=dict(color="red", width=3),
     ))
     
     fig.update_layout(
-        title="China-to-USA GDP per Capita Ratio",
-        xaxis_title="Year",
-        yaxis_title="Ratio",
+        title="Stosunek PKB per capita Chin do USA",
+        xaxis_title="Rok",
+        yaxis_title="Stosunek",
         height=400,
         template="plotly_white",
         hovermode="x unified",
     )
     
-    return fig.to_html(include_plotlyjs=False, div_id="ratio_chart")
+    return fig.to_html(include_plotlyjs='cdn', full_html=False, div_id="ratio_chart")
 
 
 def create_indicator_chart(df, indicator_name: str, title: str, y_label: str) -> str:

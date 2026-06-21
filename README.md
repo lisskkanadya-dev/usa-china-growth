@@ -6,7 +6,7 @@ A Python project that downloads World Bank data for the United States and China,
 
 - Fetches World Bank indicators for USA and China
 - Computes growth statistics and Solow/endogenous growth interpretations
-- Generates interactive charts and a static HTML report in `output/index.html`
+ - Generates interactive charts and a static HTML report in `docs/index.html`
 - Includes a full Python test suite with `pytest`
 - Ready for GitHub Pages deployment via `.github/workflows/pages.yml`
 
@@ -38,7 +38,7 @@ Run the application to fetch data, analyze growth, and generate the report:
 python app.py
 ```
 
-The report will be written to `output/index.html`.
+The report will be written to `docs/index.html`.
 
 ## Testing
 
@@ -50,15 +50,15 @@ python -m pytest -q
 
 ## Output
 
-- `output/index.html`: static report
-- `output/charts/`: generated chart HTML fragments
+- `docs/index.html`: static report
+- `docs/charts/`: generated chart HTML fragments
 
 ## Project Structure
 
 - `app.py`: main application entry point
 - `src/`: Python modules for config, data fetching, analysis, charts, and report generation
 - `tests/`: unit tests for core functionality
-- `output/`: generated report and chart assets
+- `docs/`: generated report and chart assets
 
 ## Notes
 

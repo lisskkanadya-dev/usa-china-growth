@@ -143,8 +143,8 @@ class TestRenderHTMLReport:
             with open(output_path, 'r', encoding='utf-8') as f:
                 content = f.read().lower()
             
-            # Check for key sections
-            sections = ["methodology", "limitation", "conclusion"]
+            # Check for key sections (now in Polish)
+            sections = ["metodologia", "ograniczenia", "wnioski"]
             for section in sections:
                 assert section in content
 
